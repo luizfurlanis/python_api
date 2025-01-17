@@ -1,26 +1,26 @@
 Quadros = [
     {
         'id': 1,
-        'modelo': 'Quadro Iris',
-        'cor': 'Branco',
-        'tamanho': 'Big'
+        'title': 'Quadro Iris',
+        'image': '../img/imagem1.jpg',
+        'price': '$27'
     },
     {
         'id': 2,
-        'modelo': 'Rhino',
-        'cor': 'Cinza',
-        'tamanho': 'Small'
+        'title': 'Rhino',
+        'image': '../img/imagem2.jpg',
+        'price': '$29'
     },
     {
         'id': 3,
-        'modelo': 'Do guloso',
-        'cor': 'Cor de Pele',
-        'tamanho': 'Imenso'
+        'title': 'Do guloso',
+        'image': '../img/imagem3.jpg',
+        'price': '$10'
     },
     {
         'id': 4,
-        'modelo': 'Bunitin',
-        'cor': 'Azul',
-        'tamanho': 'Medio'
+        'title': 'Bunitin',
+        'image': '../img/imagem4.jpg',
+        'price': '$25'
     }
 ]
