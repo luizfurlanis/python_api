@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, request
 import mysql.connector
 from flask_cors import CORS
 from bd import Quadros
@@ -38,5 +38,23 @@ def get_products():
     return make_response(
         jsonify(quadro)
     )
+
+@app.route('/quadros', methods=['POST'])
+def create_quadro():
+    newquadro = request.json
+
+    sql = f"INSERT INTO cadastros.produtos (id, titulo, preco, categoria, imagem, descricao, cor, tamanho) VALUES ('{newquadro['titulo']}', '{newquadro['preco']}', '{newquadro['categoria']}', '{newquadro['imagem']}', '{newquadro['descricao']}', '{newquadro['cor']}', '{newquadro['tamanho']}')"
+    
+    mycursor = mydb.cursor()
+    mycursor.execute(sql)
+    mydb.commit()
+
+    return make_response(
+        jsonify(
+            mensagem = 'Novo produto cadastrado com sucesso.',
+            quadro = newquadro
+        )
+    )
+
 
 app.run()
