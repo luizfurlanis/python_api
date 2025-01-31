@@ -43,18 +43,14 @@ def get_products():
 def create_quadro():
     newquadro = request.json
 
-    sql = f"INSERT INTO cadastros.produtos (id, titulo, preco, categoria, imagem, descricao, cor, tamanho) VALUES ('{newquadro['titulo']}', '{newquadro['preco']}', '{newquadro['categoria']}', '{newquadro['imagem']}', '{newquadro['descricao']}', '{newquadro['cor']}', '{newquadro['tamanho']}')"
-    
+    sql = "INSERT INTO cadastros.produtos (titulo, preco, categoria, imagem, descricao, cor, tamanho) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    valores = (newquadro['titulo'], newquadro['preco'], newquadro['categoria'], newquadro['imagem'], newquadro['descricao'], newquadro['cor'], newquadro['tamanho'])
+
     mycursor = mydb.cursor()
-    mycursor.execute(sql)
+    mycursor.execute(sql, valores)
     mydb.commit()
 
-    return make_response(
-        jsonify(
-            mensagem = 'Novo produto cadastrado com sucesso.',
-            quadro = newquadro
-        )
-    )
+    return jsonify(mensagem = 'Produto cadastrado!', quadro = newquadro)
 
 
 app.run()
