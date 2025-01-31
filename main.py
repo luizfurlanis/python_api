@@ -1,7 +1,6 @@
 from flask import Flask, make_response, jsonify, request
 import mysql.connector
 from flask_cors import CORS
-from bd import Quadros
 
 mydb = mysql.connector.connect(
     host='localhost',
@@ -35,9 +34,7 @@ def get_products():
             }
         )
 
-    return make_response(
-        jsonify(quadro)
-    )
+    return jsonify(quadro)
 
 @app.route('/quadros', methods=['POST'])
 def create_quadro():
