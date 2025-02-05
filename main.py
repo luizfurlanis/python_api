@@ -1,6 +1,8 @@
 from flask import Flask, make_response, jsonify, request, render_template
 import mysql.connector
 from flask_cors import CORS
+from dotenv import load_dotenv
+import os
 
 
 mydb = mysql.connector.connect(
