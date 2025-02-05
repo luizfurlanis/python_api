@@ -36,7 +36,6 @@ def get_products():
                 'tamanho': i[7]
             }
         )
-
     return jsonify(quadro)
 
 
