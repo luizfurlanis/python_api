@@ -40,9 +40,9 @@ def get_products():
 
 
 # GET method for the user UI
-@app.route('/add', methods=['GET'])
+@app.route('/add')
 def add_product_form():
-    return render_template('add_products.html')
+    return render_template('add_product.html')
 
 
 # POST method for adding new product
