@@ -1,9 +1,10 @@
-from flask import Flask, make_response, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template
 import mysql.connector
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
 mydb = mysql.connector.connect(
     host=os.getenv('DB_HOST'),
@@ -18,9 +19,10 @@ CORS(app)
 # GET method for the website
 @app.route('/quadros', methods = ['GET'])
 def get_products():
-    mycursor = mydb.cursor()
-    mycursor.execute('SELECT * FROM cadastros.produtos')
-    produtos = mycursor.fetchall()
+    cursor = mydb.cursor()
+    cursor.execute('SELECT * FROM cadastros.produtos')
+    produtos = cursor.fetchall()
+    cursor.close()
 
     quadro = list()
     for i in produtos:
@@ -39,7 +41,8 @@ def get_products():
     return jsonify(quadro)
 
 
-# GET method for the user UI
+
+# rota para adicionar produto
 @app.route('/add')
 def add_product_form():
     return render_template('add_product.html')
@@ -64,11 +67,12 @@ def create_quadro():
     sql = "INSERT INTO cadastros.produtos (titulo, preco, categoria, imagem, descricao, cor, tamanho) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     valores = (newquadro['titulo'], newquadro['preco'], newquadro['categoria'], newquadro['imagem'], newquadro['descricao'], newquadro['cor'], newquadro['tamanho'])
 
-    mycursor = mydb.cursor()
-    mycursor.execute(sql, valores)
+    cursor = mydb.cursor()
+    cursor.execute(sql, valores)
     mydb.commit()
+    cursor.close()
 
     return jsonify(mensagem = 'Produto cadastrado!', quadro = newquadro)
 
 # Run the API app
-app.run(debug=True)
+app.run(debug = True, host = 0.0.0.0, port = 5000)
