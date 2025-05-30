@@ -75,4 +75,4 @@ def create_quadro():
     return jsonify(mensagem = 'Produto cadastrado!', quadro = newquadro)
 
 # Run the API app
-app.run(debug = True, host = 0.0.0.0, port = 5000)
+app.run(debug = True, host = '0.0.0.0', port = 5000)
